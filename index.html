@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Web Programming</title>
+    <link rel="stylesheet" href="../dynamic/css/style.css">
+    <link rel="stylesheet" href="../assets/css/animation.css">
+    <style>
+        body {
+            min-height: 100vh;
+            background: url(../assets/images/bob.jpg) rgba(0, 0, 0, .6);
+            background-position: center;
+            background-size: cover;
+            background-blend-mode: multiply;
+            background-attachment: fixed;
+        }
+
+        section {
+            grid-gap: 1em;
+            padding: 30px 0;
+        }
+
+        section ul li a {
+            margin-top: 0.5em;
+        }
+
+        h1 {
+            grid-column: 1/-1;
+        }
+
+        .name {
+            color: rgb(244, 136, 58);
+            text-shadow: 1px 1px 1px white;
+        }
+
+        .js-bg {
+            display: grid;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .js-bg  ul {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+
+        .js-bg ul li a {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .js-bg ul li a:hover {
+            color: rgb(237, 187, 208);
+        }
+
+        .back-btn {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="js-bg">
+        <div class="container">
+            <section class="course">
+                <h1 class="fade-down" style="animation-delay: .5s;">Advanced Web Programming</h1>
+                <h1 class="name fade-down">- Maiko Matsuoka -</h1>
+
+                <!-- <h2 class="slide-in">Projects :</h2>
+                <ul class="slide-to-right">
+                    <li>
+                        <a href="" target="_blank"></a>
+                        <ul>
+                            <li><a class="wireframe" href="" target="_blank"></a></li>
+                        </ul>
+                    </li>
+                </ul> -->
+
+                <!-- <h2 class="slide-in" style="animation-delay: .5s;">Homework :</h2>
+                <ul class="slide-to-right" style="animation-delay: .5s;">
+                    <li><a href="" target="_blank">Three JS</a></li>
+                </ul> -->
+
+                <h2 class="slide-in" style="animation-delay: 1s;">Exercises :</h2>
+                <ul class="slide-to-right" style="animation-delay: 1s;">
+                    <li><a href="exercises/class1.php" target="_blank">class 1</a></li>
+                </ul>
+            </section>
+            <div class="back-btn zoom-in">
+                <a class="arrow" href="../course.html" class="btn">BACK</a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
