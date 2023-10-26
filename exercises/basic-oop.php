@@ -15,7 +15,7 @@
             $this->strapLen = $strapLen;
         }
 
-        public function zippStatus($zipper){
+        public function zipperStatus($zipper){
             if ($zipper) {
                 $this->zipper = " is open.";
             } 
@@ -31,14 +31,14 @@
 
     echo "The 1st backpack is called " . $backpack1->name . " and it is " . $backpack1->color . ".<br><br>";
     echo $backpack1->carry("a laptop") . "<br><br>";
-    $backpack1->zippStatus(true);
+    $backpack1->zipperStatus(true);
     echo $backpack1->name . $backpack1->zipper . "<br><br>";
     echo "Let's start packing! <br><br>" ;
 
     echo "======================================<br><br>";
     echo "The 2nd backpack is called " . $backpack2->name . " and it is " . $backpack2->size . ".<br><br>";
     echo $backpack2->carry("a lunch box") . "<br><br>";
-    $backpack2->zippStatus(false);
+    $backpack2->zipperStatus(false);
     echo $backpack2->name . $backpack2->zipper . "<br><br>";
 
 ?>
