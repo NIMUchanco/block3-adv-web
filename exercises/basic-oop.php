@@ -1,4 +1,6 @@
 <?php
+    ini_set('display_errors', 1);
+
     class Backpack {
         public $name;
         public $color;
@@ -6,6 +8,7 @@
         public $pocketNum;
         public $strapLen;
         public $zipper = " is closed.";
+        private $itemList = [];
 
         public function __construct($name, $color, $size, $pocketNum, $strapLen){
             $this->name = $name;
@@ -18,27 +21,70 @@
         public function zipperStatus($zipper){
             if ($zipper) {
                 $this->zipper = " is open.";
-            } 
+            }
+        }
+        public function changeStrapLen($lengthLeft, $lengthRight){
+            $this->strapLen = ["left" => $lengthLeft, "right" => $lengthRight];
         }
 
-        public function carry($item){
-            echo $this->name . " is carrying " . $item . ".";
+        public function displayItems() {
+            echo $this->name . " contains: ";
+            for ($i = 0; $i < count($this->itemList); $i++) {
+                if ($i == count($this->itemList) - 1) {
+                    echo "and " . $this->itemList[$i] . ".";
+                } else {
+                    echo $this->itemList[$i] . ", ";
+                }
+            }
+        }
+        public function addItem($item){
+                $this->itemList[] = $item;
+        }
+        public function getItem($index){
+            if ($this->isEmpty()) {
+                return null;
+            } else {
+                return $this->itemList[$index];
+            }
+        }
+
+        private function isEmpty(){
+            if (!count($this->itemList)) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
+    // Intantiate two objects
     $backpack1 = new Backpack("daypack", "orange", "20L", "5", "20cm");
     $backpack2 = new Backpack("travelpack", "black", "40L", "10", "40cm");
 
-    echo "The 1st backpack is called " . $backpack1->name . " and it is " . $backpack1->color . ".<br><br>";
-    echo $backpack1->carry("a laptop") . "<br><br>";
-    $backpack1->zipperStatus(true);
-    echo $backpack1->name . $backpack1->zipper . "<br><br>";
-    echo "Let's start packing! <br><br>" ;
+    // Display the properties
+    echo "<h2>Object: Backpack</h2>";
 
-    echo "======================================<br><br>";
-    echo "The 2nd backpack is called " . $backpack2->name . " and it is " . $backpack2->size . ".<br><br>";
-    echo $backpack2->carry("a lunch box") . "<br><br>";
+    // The first object
+    echo "the 1st backpack is called " . $backpack1->name . ", it is " . $backpack1->color . " and the both strap lengths are " . $backpack1->strapLen . ".<br><br>";
+    $backpack1->changeStrapLen("20cm", "25cm");
+    echo "changed the LEFT strap length to " . $backpack1->strapLen["right"] . ".<br><br>";
+    $backpack1->zipperStatus(true);
+    echo $backpack1->name . $backpack1->zipper ."<br><br>";
+    echo "let's start packing!<br><br>";
+    $backpack1->addItem("a laptop");
+    $backpack1->addItem("a waterbotle");
+    $backpack1->addItem("a lunch box");
+    $backpack1->displayItems();
+
+
+    echo "<br><br>======================================<br><br>";
+    // The second object
+    echo "the 2nd backpack is called " . $backpack2->name . " and it is " . $backpack2->size . ".<br><br>";
     $backpack2->zipperStatus(false);
     echo $backpack2->name . $backpack2->zipper . "<br><br>";
+    $backpack2->addItem("a toothbrush");
+    $backpack2->addItem("shoes");
+    $backpack2->addItem("clothes");
+    echo "The 1st item in " . $backpack2->name . " is " . $backpack2->getItem(0) . ".<br><br>";
 
 ?>
