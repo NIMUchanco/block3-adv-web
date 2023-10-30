@@ -9,8 +9,10 @@
         public $strapLen;
         public $zipper = " is closed.";
         private $itemList = [];
+        private $isFull = false;
 
-        public function __construct($name, $color, $size, $pocketNum, $strapLen){
+        // constructor
+        public function __construct($name, $color, $size, $pocketNum, $strapLen) {
             $this->name = $name;
             $this->color = $color;
             $this->size = $size;
@@ -18,15 +20,26 @@
             $this->strapLen = $strapLen;
         }
 
-        public function zipperStatus($zipper){
+        // public methods
+        public function zipperStatus($zipper) {
             if ($zipper) {
                 $this->zipper = " is open.";
             }
         }
-        public function changeStrapLen($lengthLeft, $lengthRight){
+        public function changeStrapLen($lengthLeft, $lengthRight) {
             $this->strapLen = ["left" => $lengthLeft, "right" => $lengthRight];
         }
-
+        public function addItem($item) {
+            if(!$this->isFull()) {
+                $this->itemList[] = $item;
+                if (count($this->itemList) == (trim($this->size, "L") / 5)) {
+                    $this->isFull = true;
+                }
+            } else {
+                echo $this->name . " is full.";
+            }
+            
+        }
         public function displayItems() {
             echo $this->name . " contains: ";
             for ($i = 0; $i < count($this->itemList); $i++) {
@@ -37,10 +50,7 @@
                 }
             }
         }
-        public function addItem($item){
-                $this->itemList[] = $item;
-        }
-        public function getItem($index){
+        public function getItem($index) {
             if ($this->isEmpty()) {
                 return null;
             } else {
@@ -48,16 +58,20 @@
             }
         }
 
-        private function isEmpty(){
+        // private methods
+        private function isEmpty() {
             if (!count($this->itemList)) {
                 return true;
             } else {
                 return false;
             }
         }
+        private function isFull() {
+            return $this->isFull;
+        }
     }
 
-    // Intantiate two objects
+    // Instantiate two objects
     $backpack1 = new Backpack("daypack", "orange", "20L", "5", "20cm");
     $backpack2 = new Backpack("travelpack", "black", "40L", "10", "40cm");
 
@@ -75,9 +89,16 @@
     $backpack1->addItem("a waterbotle");
     $backpack1->addItem("a lunch box");
     $backpack1->displayItems();
+    echo "<br><br>";
 
+    // make the backpack full
+    $backpack1->addItem("a charger");
+    $backpack1->addItem("a tumbler");
+    echo "<br><br>";
+    $backpack1->displayItems();
 
     echo "<br><br>======================================<br><br>";
+    
     // The second object
     echo "the 2nd backpack is called " . $backpack2->name . " and it is " . $backpack2->size . ".<br><br>";
     $backpack2->zipperStatus(false);
