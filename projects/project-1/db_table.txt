@@ -13,6 +13,5 @@
 |    Compatibility    |
 +---------------------+
 | CompatibilityID (PK)|
-| PartID1 (FK)        |
-| PartID2 (FK)        |
+| CompatibilityList   |
 +---------------------+
