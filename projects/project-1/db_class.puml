@@ -1,0 +1,58 @@
+@startuml
+class Brand {
+    - brandID
+    - brandName
+
+    + __construct(brandID, brandName)
+
+    + getBrandID()
+    + setBrandID()
+    + getBrandName()
+    + setBrandName()
+}
+
+class PartType {
+    - partTypeID
+    - partTypeName
+
+    + __construct(partTypeID, partTypeName)
+    + getPartTypeID()
+    + setPartTypeID()
+    + getPartTypeName()
+    + setPartTypeName()
+}
+
+class Part {
+    # partID
+    - partName
+    - brandID
+    - partTypeID
+    - partPrice
+    - partStock
+
+    + __construct(partID, partName, brandID, partTypeID, partPrice, partStock)
+    + getPartID()
+    + setPartID()
+    + getPartName()
+    + setPartName()
+    + getPartTypeID()
+    + setPartTypeID()
+    + getBrandID()
+    + setBrandID()
+    + getPartPrice()
+    + setPartPrice()
+    + getPartStock()
+    + setPartStock()
+}
+
+class Compatibility extends Part {
+    - compatibilityID
+    - compatibilityList = array(amd, intel, arm)
+
+    + __construct(compatibilityID, compatibilityList)
+    + getCompatibilityID()
+    + setCompatibilityID()
+    + getCompatibilityList()
+    + checkCompatibility(partID)
+}
+@enduml

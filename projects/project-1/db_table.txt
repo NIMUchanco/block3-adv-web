@@ -1,0 +1,18 @@
++-----------------+        +---------------------+        +---------------------+
+|     Brands      |        |     PartTypes       |        |        Parts        |
++-----------------+        +---------------------+        +---------------------+
+| BrandID (PK)    |        | PartTypeID (PK)     |        | PartID (PK)         |
+| BrandName       |        | PartTypeName        |        | PartName            |
++-----------------+        +---------------------+        | BrandID (FK)        |
+                                                          | PartTypeID (FK)     |
+                                                          | Price               |
+                                                          | Stock               |
+                                                          +---------------------+
+
++---------------------+
+|    Compatibility    |
++---------------------+
+| CompatibilityID (PK)|
+| PartID1 (FK)        |
+| PartID2 (FK)        |
++---------------------+
