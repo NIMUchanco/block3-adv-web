@@ -1,27 +1,4 @@
 @startuml
-class Brand {
-    - brandID
-    - brandName
-
-    + __construct(brandID, brandName)
-
-    + getBrandID()
-    + setBrandID()
-    + getBrandName()
-    + setBrandName()
-}
-
-class PartType {
-    - partTypeID
-    - partTypeName
-
-    + __construct(partTypeID, partTypeName)
-    + getPartTypeID()
-    + setPartTypeID()
-    + getPartTypeName()
-    + setPartTypeName()
-}
-
 class Part {
     # partID
     - partName
@@ -29,8 +6,9 @@ class Part {
     - partTypeID
     - partPrice
     - partStock
+    - compatibilityList = array(amd, intel, arm)
 
-    + __construct(partID, partName, brandID, partTypeID, partPrice, partStock)
+    + __construct(partID, partName, brandID, partTypeID, partPrice, partStock, compatibilityList)
     + getPartID()
     + setPartID()
     + getPartName()
@@ -43,16 +21,30 @@ class Part {
     + setPartPrice()
     + getPartStock()
     + setPartStock()
-}
-
-class Compatibility extends Part {
-    - compatibilityID
-    - compatibilityList = array(amd, intel, arm)
-
-    + __construct(compatibilityID, compatibilityList)
-    + getCompatibilityID()
-    + setCompatibilityID()
     + getCompatibilityList()
     + checkCompatibility(partID)
+}
+
+class Brand {
+    - brandID
+    - brandName
+
+    + __construct(brandID, brandName)
+
+    + getBrandID()
+    + setBrandID()
+    + getBrandName()
+    + setBrandName()
+}
+
+class PartType extends Part {
+    - partTypeID
+    - partTypeName
+
+    + __construct(partTypeID, partTypeName)
+    + getPartTypeID()
+    + setPartTypeID()
+    + getPartTypeName()
+    + setPartTypeName()
 }
 @enduml
