@@ -48,6 +48,7 @@ INSERT INTO `models` (`modelD`, `modelName`, `brandID`, `partsTypeID`, `price`, 
 ALTER TABLE `models` ADD CONSTRAINT `brandID` FOREIGN KEY (`brandID`) REFERENCES `brands`(`brandID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 ALTER TABLE `models` ADD CONSTRAINT `partsTypeID` FOREIGN KEY (`partsTypeID`) REFERENCES `partsType`(`partsTypeID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 ALTER TABLE `models` ADD CONSTRAINT `compatibilityID` FOREIGN KEY (`compatibilityID`) REFERENCES `compatibility`(`compatibilityID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `stock` ADD CONSTRAINT `modelID` FOREIGN KEY (`modelID`) REFERENCES `models`(`modelD`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 
 -- SORTING --

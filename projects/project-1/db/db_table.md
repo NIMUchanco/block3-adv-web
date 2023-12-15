@@ -19,7 +19,7 @@
   | 5 | Corsair |
 
 - Parts Type
-  | PartID | PartName |
+  | PartTypeID | PartTypeName |
   | ------ | -------- |
   | 1 | CPU |
   | 2 | RAM |
