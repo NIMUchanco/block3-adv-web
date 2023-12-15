@@ -8,4 +8,8 @@ Block 3 - Advanced Web Programming Course
 
 ## exercises folder
 
-- you can find homeworks in this folder
+- you can find homeworks and exercises in this folder
+
+## index.html
+
+- you can find all the links (projects and exercises) relating to this course
