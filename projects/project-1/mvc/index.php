@@ -12,13 +12,15 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 
-        include_once("controllers/controller.php");
+        include_once 'controllers/controller.php';
+        include_once '_includes/config.php';
 
-        $connection1 = new connectionObject("localhost:3306", "maiko25_mvc", "s?3v254Ur", "maiko25_mvc_db");
-        $model = new computerModel($connection1);
+        $connection = new ConnectionObject($dbConfig['host'], $dbConfig['username'], $dbConfig['password'], $dbConfig['database']);
+        $model = new computerModel($connection);
         $models = $model->selectAll();
 
-        include("views/home.php");
+        include 'views/home.php';
+
     ?>
 </body>
 </html>

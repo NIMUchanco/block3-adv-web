@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
     include_once 'models/model.php';
+    include_once '_includes/config.php';
    
     class Controller {
         private $model;
@@ -44,8 +45,8 @@ ini_set('display_errors', 1);
         }
     }
 
-    $connection1 = new connectionObject("localhost:3306", "maiko25_mvc", "s?3v254Ur", "maiko25_mvc_db");
-    $controller = new Controller($connection1);
+    $connection = new ConnectionObject($dbConfig['host'], $dbConfig['username'], $dbConfig['password'], $dbConfig['database']);
+    $controller = new Controller($connection);
 
 
     if(isset($_POST['submit'])) {
