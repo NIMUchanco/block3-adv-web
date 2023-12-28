@@ -35,6 +35,7 @@ class computerModel {
     //         return false;
     //     }
     // }
+
     public function selectAll(){
         $mysqli = $this->connect();
         if($mysqli) {
@@ -49,10 +50,57 @@ class computerModel {
         }
     }
 
-    public function insertInfo($modelName, $brandID, $partsTypeID, $price, $compatibilityID) {
+    public function insertModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID) {
         $mysqli = $this->connect();
         if($mysqli) {
             $mysqli->query("INSERT INTO models (modelName, brandID, partsTypeID, price, compatibilityID) VALUES ('$modelName', '$brandID', '$partsTypeID', '$price', '$compatibilityID')");
+            $mysqli->close();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function selectModelID($id){
+        $mysqli = $this->connect();
+        if($mysqli) {
+            $result = $mysqli->query("SELECT * FROM models WHERE modelID='$id'");
+            // while($row = $result->fetch_assoc()) {
+            //     $results[] = $row;
+            // }
+            $mysqli->close();
+            return $result->fetch_assoc();
+            // return $results;
+            
+        } else {
+            return false;
+        }
+    }
+
+    public function updateModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id) {
+        $mysqli = $this->connect();
+        if($mysqli) {
+            $mysqli->query("UPDATE models SET modelName='$modelName', brandID='$brandID', partsTypeID='$partsTypeID', price='$price', compatibilityID='$compatibilityID' WHERE modelID='$id'");
+            $mysqli->close();
+            return true;
+        } else {
+            return false;
+        }
+        //     $result = $mysqli->query("UPDATE models SET modelName='$modelName', brandID='$brandID', partsTypeID='$partsTypeID', price='$price', compatibilityID='$compatibilityID' WHERE modelID='$id'");
+        //     while($row = $result->fetch_assoc()) {
+        //         $results[] = $row;
+        //     }
+        //     $mysqli->close();
+        //     return $results;
+        // } else {
+        //     return false;
+        // }
+    }
+
+    public function deleteModel($id) {
+        $mysqli = $this->connect();
+        if($mysqli) {
+            $mysqli->query("DELETE FROM models WHERE models.modelID='$id'");
             $mysqli->close();
             return true;
         } else {
