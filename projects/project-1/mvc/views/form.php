@@ -1,4 +1,4 @@
-<h3 style="margin-top:2em;">Input data</h3>
+<h3 style="margin-top:2em;">Enter new entry</h3>
 <form method="POST">
     <input type="text" name="modelName" placeholder="Model Name" value="<?php echo isset($_POST['modelName']) ? $_POST['modelName'] : ""; ?>">
     <select name="brandID" id="brandID">
@@ -26,8 +26,9 @@
         }
         ?>
     </select>
+    <input type="text" name="stockNum" placeholder="Stock Number">
     <input type="submit" name="submit" value="Submit">
-    <input type="reset" name="reset" value="Reset">
+    <input type="button" onclick="window.location.href='index.php';" value="Clear">
 </form>
 
 <h3 style="margin-top:2em;">Add more selections</h3>
@@ -35,5 +36,5 @@
     <input type="text" name="brandName" placeholder="Brand Name" value="<?php echo isset($_POST['brandName']) ? $_POST['brandName'] : ""; ?>">
     <input type="text" name="partsTypeName" placeholder="Parts Type" value="<?php echo isset($_POST['partsTypeName']) ? $_POST['partsTypeName'] : ""; ?>">
     <input type="submit" name="add" value="Add">
-    <input type="reset" name="reset" value="Reset">
+    <input type="reset" name="reset" value="Clear">
 </form>

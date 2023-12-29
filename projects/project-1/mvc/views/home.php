@@ -11,6 +11,7 @@ $headerCellStyle = "border: 1px solid #ddd; background-color: #f2f2f2; padding: 
         <th style="<?php echo $headerCellStyle; ?>">Part Type</th>
         <th style="<?php echo $headerCellStyle; ?>">Price</th>
         <th style="<?php echo $headerCellStyle; ?>">Compatibility</th>
+        <th style="<?php echo $headerCellStyle; ?>">Stock Number</th>
         <th style="<?php echo $headerCellStyle; ?>"></th>
     </tr>
     <?php
@@ -22,6 +23,7 @@ $headerCellStyle = "border: 1px solid #ddd; background-color: #f2f2f2; padding: 
             echo "<td style='" . $cellStyle . "'>" . $model['partsTypeName'] . "</td>";
             echo "<td style='" . $cellStyle . "'>" . "$" . $model['price'] . "</td>";
             echo "<td style='" . $cellStyle . "'>" . $model['compatibilityList'] . "</td>";
+            echo "<td style='" . $cellStyle . "'>" . $model['stockNum'] . "</td>";
             echo "<td style='" . $cellStyle . "'>";
             echo "<a href='?action=edit&modelID=" . $model['modelID'] . "'>Edit</a>";
             echo " | ";

@@ -22,19 +22,6 @@ class computerModel {
             return false;
         }
     }
-    // public function selectModels(){
-    //     $mysqli = $this->connect();
-    //     if($mysqli) {
-    //         $result = $mysqli->query("SELECT * FROM models");
-    //         while($row = $result->fetch_assoc()) {
-    //             $results[] = $row;
-    //         }
-    //         $mysqli->close();
-    //         return $results;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
     public function selectAll(){
         $mysqli = $this->connect();
@@ -92,10 +79,10 @@ class computerModel {
         }
     }
 
-    public function insertModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID) {
+    public function insertModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $stockNum) {
         $mysqli = $this->connect();
         if($mysqli) {
-            $mysqli->query("INSERT INTO models (modelName, brandID, partsTypeID, price, compatibilityID) VALUES ('$modelName', '$brandID', '$partsTypeID', '$price', '$compatibilityID')");
+            $mysqli->query("INSERT INTO models (modelName, brandID, partsTypeID, price, compatibilityID, stockNum) VALUES ('$modelName', '$brandID', '$partsTypeID', '$price', '$compatibilityID', '$stockNum')");
             $mysqli->close();
             return true;
         } else {
@@ -129,36 +116,22 @@ class computerModel {
         $mysqli = $this->connect();
         if($mysqli) {
             $result = $mysqli->query("SELECT * FROM models WHERE modelID='$id'");
-            // while($row = $result->fetch_assoc()) {
-            //     $results[] = $row;
-            // }
             $mysqli->close();
-            return $result->fetch_assoc();
-            // return $results;
-            
+            return $result->fetch_assoc();          
         } else {
             return false;
         }
     }
 
-    public function updateModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id) {
+    public function updateModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id, $stockNum) {
         $mysqli = $this->connect();
         if($mysqli) {
-            $mysqli->query("UPDATE models SET modelName='$modelName', brandID='$brandID', partsTypeID='$partsTypeID', price='$price', compatibilityID='$compatibilityID' WHERE modelID='$id'");
+            $mysqli->query("UPDATE models SET modelName='$modelName', brandID='$brandID', partsTypeID='$partsTypeID', price='$price', compatibilityID='$compatibilityID', stockNum='$stockNum' WHERE modelID='$id'");
             $mysqli->close();
             return true;
         } else {
             return false;
         }
-        //     $result = $mysqli->query("UPDATE models SET modelName='$modelName', brandID='$brandID', partsTypeID='$partsTypeID', price='$price', compatibilityID='$compatibilityID' WHERE modelID='$id'");
-        //     while($row = $result->fetch_assoc()) {
-        //         $results[] = $row;
-        //     }
-        //     $mysqli->close();
-        //     return $results;
-        // } else {
-        //     return false;
-        // }
     }
 
     public function deleteModel($id) {

@@ -44,26 +44,23 @@ ini_set('display_errors', 1);
             $partsTypeID = $_POST['partsTypeID'];
             $price = $_POST['price'];
             $compatibilityID = $_POST['compatibilityID'];
-            if (!$modelName || !$brandID || !$partsTypeID || !$price || !$compatibilityID) {
+            $stockNum = $_POST['stockNum'];
+            if (!$modelName || !$brandID || !$partsTypeID || !$price || !$compatibilityID || !$stockNum) {
                 echo "<p>Missing information</p>";
-                $this->showForm();
                 return;
-            } else if($this->model->insertModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID)){
-                echo "<p>Added models: $modelName, $brandID, $partsTypeID, $price, $compatibilityID</p>";
+            } else if($this->model->insertModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $stockNum)){
                 header("Location: index.php");
                 exit();
             } else {
                 echo "<p>Could not add models</p>";
-                $this->showForm();
             }
         }
 
         public function addBrand() {
             $brandName = $_POST['brandName'];
             if (!$brandName) {
-                echo "<p>Missing information</p>";
+                echo "<p>Missing Brand Name</p>";
             } else if($this->model->insertBrand($brandName)){
-                echo "<p>Added brand: $brandName</p>";
                 header("Location: index.php");
             } else {
                 echo "<p>Could not add brand</p>";
@@ -73,16 +70,15 @@ ini_set('display_errors', 1);
         public function addPartsType() {
             $partsTypeName = $_POST['partsTypeName'];
             if (!$partsTypeName) {
-                echo "<p>Missing information</p>";
+                echo "<p>Missing Parts Type</p>";
             } else if($this->model->insertPartsType($partsTypeName)){
-                echo "<p>Added parts type: $partsTypeName</p>";
                 header("Location: index.php");
             } else {
                 echo "<p>Could not add parts type</p>";
             }
         }
 
-        public function editModel($id) {
+        public function getEditModelID($id) {
             $modelData = $this->model->selectModelID($id);
             $brands = $this->getBrand();
             $partsTypes = $this->getPartsType();
@@ -95,8 +91,8 @@ ini_set('display_errors', 1);
             }
         }    
 
-        public function updateInfo($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id) {
-            if ($this->model->updateModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id)) {
+        public function updateInfo($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id, $stockNum) {
+            if ($this->model->updateModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id, $stockNum)) {
                 header("Location: index.php");
                 exit();
             } else {
@@ -108,7 +104,6 @@ ini_set('display_errors', 1);
         public function deleteInfo($id) {
             $model = $this->model->deleteModel($id);
             if ($model) {
-                //$this->showAll();
                 header("Location: index.php");
                 exit();
             } else {
@@ -126,7 +121,7 @@ ini_set('display_errors', 1);
         $controller->showForm();
     } else if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['modelID'])) {
         $id = $_GET['modelID'];
-        $controller->editModel($id);
+        $controller->getEditModelID($id);
     } else {
         $controller->showForm();
     }
@@ -134,7 +129,6 @@ ini_set('display_errors', 1);
     if (isset($_POST['add'])) {
         $controller->addBrand();
         $controller->addPartsType();
-        $controller->showForm();
     }
 
     if (isset($_POST['submitEdit'])) {
@@ -144,7 +138,8 @@ ini_set('display_errors', 1);
         $price = $_POST['price'];
         $compatibilityID = $_POST['compatibilityID'];
         $id = $_POST['modelID'];
-        $controller->updateInfo($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id);
+        $stockNum = $_POST['stockNum'];
+        $controller->updateInfo($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id, $stockNum);
     }
 
     if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['modelID'])) {

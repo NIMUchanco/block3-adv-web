@@ -33,6 +33,7 @@ ini_set('display_errors', 1);
         }
         ?>
     </select>
+    <input type="text" name="stockNum" value="<?php echo $modelData['stockNum']; ?>">
     <input type="submit" name="submitEdit" value="Save Changes">
     <input type="button" onclick="window.location.href='index.php';" value="Cancel">
 </form>
