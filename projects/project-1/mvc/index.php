@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MVC Project 1</title>
 </head>
-<body>
+<body style="padding:.5em 1.5em;">
     <h1>Computer Builder</h1>
-
     <?php
     error_reporting(E_ALL);
     ini_set('display_errors', 1);

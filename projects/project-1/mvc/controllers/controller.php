@@ -10,16 +10,29 @@ ini_set('display_errors', 1);
         public function __construct($connection) {
             $this->model = new computerModel($connection);
         }
-        // public function showModels() {
-        //     $models = $this->model->selectModels();
-        //     include 'views/home.php';
-        // }
+
         public function showAll() {
             $models = $this->model->selectAll();
             // var_dump($models);
             include 'views/home.php';
         }
+
+        public function getBrand() {
+            return $this->model->selectBrand();
+        }
+
+        public function getPartsType() {
+            return $this->model->selectPartsType();
+        }
+
+        public function getCompatibility() {
+            return $this->model->selectCompatibility();
+        }
+
         public function showForm() {
+            $brands = $this->getBrand();
+            $partsTypes = $this->getPartsType();
+            $compatibilities = $this->getCompatibility();
             include 'views/form.php';
         }
         public function addInfo() {
@@ -45,8 +58,35 @@ ini_set('display_errors', 1);
             }
         }
 
+        public function addBrand() {
+            $brandName = $_POST['brandName'];
+            if (!$brandName) {
+                echo "<p>Missing information</p>";
+            } else if($this->model->insertBrand($brandName)){
+                echo "<p>Added brand: $brandName</p>";
+                header("Location: index.php");
+            } else {
+                echo "<p>Could not add brand</p>";
+            }
+        }
+
+        public function addPartsType() {
+            $partsTypeName = $_POST['partsTypeName'];
+            if (!$partsTypeName) {
+                echo "<p>Missing information</p>";
+            } else if($this->model->insertPartsType($partsTypeName)){
+                echo "<p>Added parts type: $partsTypeName</p>";
+                header("Location: index.php");
+            } else {
+                echo "<p>Could not add parts type</p>";
+            }
+        }
+
         public function editModel($id) {
             $modelData = $this->model->selectModelID($id);
+            $brands = $this->getBrand();
+            $partsTypes = $this->getPartsType();
+            $compatibilities = $this->getCompatibility();
             if ($modelData) {
                 // print_r($modelData);
                 include 'views/edit-form.php';
@@ -56,21 +96,6 @@ ini_set('display_errors', 1);
         }    
 
         public function updateInfo($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id) {
-            // $model = $this->model->updateModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id);
-            // if ($model) {
-            //     header("Location: index.php");
-            //     exit();
-            // } else {
-            //     echo "Error updating record";
-            // }
-            // if (isset($_POST['submitEdit'])) {
-            //     $id = $_POST['modelID'];
-            //     $modelName = $_POST['modelName'];
-            //     $brandID = $_POST['brandID'];
-            //     $partsTypeID = $_POST['partsTypeID'];
-            //     $price = $_POST['price'];
-            //     $compatibilityID = $_POST['compatibilityID'];
-                
             if ($this->model->updateModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id)) {
                 header("Location: index.php");
                 exit();
@@ -98,6 +123,7 @@ ini_set('display_errors', 1);
 
     if(isset($_POST['submit'])) {
         $controller->addInfo();
+        $controller->showForm();
     } else if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['modelID'])) {
         $id = $_GET['modelID'];
         $controller->editModel($id);
@@ -105,10 +131,11 @@ ini_set('display_errors', 1);
         $controller->showForm();
     }
 
-    // if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['modelID'])) {
-    //     $id = $_GET['modelID'];
-    //     $controller->editModel($id);
-    // }
+    if (isset($_POST['add'])) {
+        $controller->addBrand();
+        $controller->addPartsType();
+        $controller->showForm();
+    }
 
     if (isset($_POST['submitEdit'])) {
         $modelName = $_POST['modelName'];

@@ -39,7 +39,49 @@ class computerModel {
     public function selectAll(){
         $mysqli = $this->connect();
         if($mysqli) {
-            $result = $mysqli->query("SELECT models.*, brands.brandName, partsType.partsTypeName, compatibility.compatibilityList FROM models JOIN brands ON models.brandID = brands.brandID JOIN partsType ON models.partsTypeID = partsType.partsTypeID JOIN compatibility ON models.compatibilityID = compatibility.compatibilityID ORDER BY models.modelName ASC;");
+            $result = $mysqli->query("SELECT models.*, brands.brandName, partsType.partsTypeName, compatibility.compatibilityList FROM models JOIN brands ON models.brandID = brands.brandID JOIN partsType ON models.partsTypeID = partsType.partsTypeID JOIN compatibility ON models.compatibilityID = compatibility.compatibilityID ORDER BY models.modelID ASC;");
+            while($row = $result->fetch_assoc()) {
+                $results[] = $row;
+            }
+            $mysqli->close();
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function selectBrand(){
+        $mysqli = $this->connect();
+        if($mysqli) {
+            $result = $mysqli->query("SELECT * FROM brands");
+            while($row = $result->fetch_assoc()) {
+                $results[] = $row;
+            }
+            $mysqli->close();
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function selectPartsType(){
+        $mysqli = $this->connect();
+        if($mysqli) {
+            $result = $mysqli->query("SELECT * FROM partsType");
+            while($row = $result->fetch_assoc()) {
+                $results[] = $row;
+            }
+            $mysqli->close();
+            return $results;
+        } else {
+            return false;
+        }
+    }
+    
+    public function selectCompatibility(){
+        $mysqli = $this->connect();
+        if($mysqli) {
+            $result = $mysqli->query("SELECT * FROM compatibility");
             while($row = $result->fetch_assoc()) {
                 $results[] = $row;
             }
@@ -54,6 +96,28 @@ class computerModel {
         $mysqli = $this->connect();
         if($mysqli) {
             $mysqli->query("INSERT INTO models (modelName, brandID, partsTypeID, price, compatibilityID) VALUES ('$modelName', '$brandID', '$partsTypeID', '$price', '$compatibilityID')");
+            $mysqli->close();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function insertBrand($brandName) {
+        $mysqli = $this->connect();
+        if($mysqli) {
+            $mysqli->query("INSERT INTO brands (brandName) VALUES ('$brandName')");
+            $mysqli->close();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function insertPartsType($partsTypeName) {
+        $mysqli = $this->connect();
+        if($mysqli) {
+            $mysqli->query("INSERT INTO partsType (partsTypeName) VALUES ('$partsTypeName')");
             $mysqli->close();
             return true;
         } else {
