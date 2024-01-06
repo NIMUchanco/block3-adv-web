@@ -44,11 +44,11 @@
 
 - Staffs
 
-  | staffNo | desntistName  | appointment month year |
-  | ------- | ------------- | ---------------------- |
-  | S1011   | Tony Smith    | Aug 2003               |
-  | S1024   | Helen Pearson | Sept 2003              |
-  | S1032   | Robin Plevin  | Oct 2023               |
+  | staffNo | desntistName  |
+  | ------- | ------------- |
+  | S1011   | Tony Smith    |
+  | S1024   | Helen Pearson |
+  | S1032   | Robin Plevin  |
 
 - Patients
 

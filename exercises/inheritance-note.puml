@@ -1,0 +1,154 @@
+@startuml
+class Animal {
+    + makeSound()
+}
+class Cat extends Animal {
+    + makeSound()
+}
+
+class Vehical {
+    + drive()
+}
+class Car extends Vehical {
+    + drive()
+}
+
+
+class Shape {
+    + getArea()
+}
+class Rectangle extends Shape {
+    - width
+    - height
+    + __construct(width, height)
+    + getArea()
+}
+
+
+class Employee {
+    # salary
+    + __construct(salary)
+    + work()
+    + getSalary()
+}
+class HRManager extends Employee {
+    - employees = []
+    + __construct(salary)
+    + work()
+    + addEmployee($employee)
+}
+
+
+class BankAccount {
+    # balance
+    + __construct(balance)
+    + deposit(amout)
+    + withdraw(amout)
+}
+
+class SavingsAccount extends BankAccount {
+    + __construct(balance)
+    + withdraw(amout)
+}
+
+
+class Animal {
+    + move()
+}
+
+class Cheetah extends Animal {
+    + move()
+}
+
+
+class Person {
+    # firstName
+    # lastName
+
+    + __construct(firstName, lastName)
+    + getFirstName()
+    + getLastName()
+}
+
+class Employee extends Person {
+    # employeeId
+    # jobTitle
+
+    + __construct(firstName, lastName, employeeId, jobTitle)
+    + getEmployeeId()
+    + getLastName()
+}
+
+
+class Shape {
+    + getPerimeter()
+    + getArea()
+}
+
+class Circle extends Shape {
+    - radius
+
+    + __construct(radius)
+    + getPerimeter()
+    + getArea()
+}
+
+
+class Vehical {
+    # make
+    # model
+    # year
+    # fuelType
+
+    + __construct(make, model, year, fuelType)
+    + getMake()
+    + getModel()
+    + getYear()
+    + getFuelType()
+    + calcFuelEfficiency()
+    + calcDistanceTravelled()
+    + calcMaxSpeed()
+}
+
+class Truck extends Vehical {
+    + calcFuelEfficiency()
+    + calcDistanceTravelled()
+    + calcMaxSpeed()
+}
+class Car extends Vehical {
+    + calcFuelEfficiency()
+    + calcDistanceTravelled()
+    + calcMaxSpeed()
+}
+class Motorcycle extends Vehical {
+    + calcFuelEfficiency()
+    + calcDistanceTravelled()
+    + calcMaxSpeed()
+}
+
+
+class Employee {
+    # name
+    # address
+    # salary
+    # jobTitle
+
+    + __construct(name, address, salary, jobTitle)
+    + getName()
+    + getAddress()
+    + getSalary()
+    + getJobTitle()
+}
+
+class Manager extends Employee {
+    + calcBonus()
+    + generatePerfomanceReport()
+    + manageProject()
+}
+
+class Developer extends Employee {
+}
+
+class Programmer extends Employee {
+}
+@enduml
