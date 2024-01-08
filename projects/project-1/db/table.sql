@@ -41,7 +41,7 @@ INSERT INTO `compatibility` (`compatibilityID`, `compatibilityList`) VALUES (NUL
 
 INSERT INTO `stock` (`stockID`, `modelID`, `stockNum`) VALUES (NULL, '1', '50'), (NULL, '2', '100'), (NULL, '3', '80'), (NULL, '4', '150'), (NULL, '5', '200');
 
-INSERT INTO `models` (`modelD`, `modelName`, `brandID`, `partsTypeID`, `price`, `compatibilityID`) VALUES (NULL, 'ASUS ROG Strix B550-F Gaming', '2', '5', '1000', '1'), (NULL, 'Corsair Vengeance LPX', '5', '2', '300', '4'), (NULL, 'Samsung 970 EVO', '4', '3', '200', '5'), (NULL, 'NVIDIA GeForce RTX 3080', '3', '4', '250', '4'), (NULL, 'Apple M1 Pro', '1', '1', '2000', '3');
+INSERT INTO `models` (`modelID`, `modelName`, `brandID`, `partsTypeID`, `price`, `compatibilityID`, `stockNum`) VALUES (NULL, 'ASUS ROG Strix B550-F Gaming', '2', '5', '1000', '1', '50'), (NULL, 'Corsair Vengeance LPX', '5', '2', '300', '4', '100'), (NULL, 'Samsung 970 EVO', '4', '3', '200', '5', '80'), (NULL, 'NVIDIA GeForce RTX 3080', '3', '4', '250', '4', '150'), (NULL, 'Apple M1 Pro', '1', '1', '2000', '3', '200');
 
 
 -- FOREIGN KEYS --
