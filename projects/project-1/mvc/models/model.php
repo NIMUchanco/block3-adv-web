@@ -31,7 +31,12 @@ class computerModel {
                 $results[] = $row;
             }
             $mysqli->close();
-            return $results;
+
+            if (isset($results)) {
+                return $results;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
