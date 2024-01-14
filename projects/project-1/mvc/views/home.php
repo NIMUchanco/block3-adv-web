@@ -1,30 +1,28 @@
 <?php
-
-$cellStyle = "border: 1px solid #ddd; padding: 8px; text-align: left;";
-$headerCellStyle = "border: 1px solid #ddd; background-color: #f2f2f2; padding: 8px; text-align: left;";
+include_once 'views/header.php';
 ?>
-<h3 style="margin-top:2em;">Joined Table</h3>
-<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+<h3>Joined Table</h3>
+<table>
     <tr>
-        <th style="<?php echo $headerCellStyle; ?>">Model Name</th>
-        <th style="<?php echo $headerCellStyle; ?>">Brand</th>
-        <th style="<?php echo $headerCellStyle; ?>">Part Type</th>
-        <th style="<?php echo $headerCellStyle; ?>">Price</th>
-        <th style="<?php echo $headerCellStyle; ?>">Compatibility</th>
-        <th style="<?php echo $headerCellStyle; ?>">Stock Number</th>
-        <th style="<?php echo $headerCellStyle; ?>"></th>
+        <th>Model Name</th>
+        <th>Brand</th>
+        <th>Part Type</th>
+        <th>Price</th>
+        <th>Compatibility</th>
+        <th>Stock Number</th>
+        <th></th>
     </tr>
     <?php
     if($models) {
         foreach($models as $model) {
             echo "<tr>";
-            echo "<td style='" . $cellStyle . "'>" . $model['modelName'] . "</td>";
-            echo "<td style='" . $cellStyle . "'>" . $model['brandName'] . "</td>";
-            echo "<td style='" . $cellStyle . "'>" . $model['partsTypeName'] . "</td>";
-            echo "<td style='" . $cellStyle . "'>" . "$" . $model['price'] . "</td>";
-            echo "<td style='" . $cellStyle . "'>" . $model['compatibilityList'] . "</td>";
-            echo "<td style='" . $cellStyle . "'>" . $model['stockNum'] . "</td>";
-            echo "<td style='" . $cellStyle . "'>";
+            echo "<td>" . $model['modelName'] . "</td>";
+            echo "<td>" . $model['brandName'] . "</td>";
+            echo "<td>" . $model['partsTypeName'] . "</td>";
+            echo "<td>" . "$" . $model['price'] . "</td>";
+            echo "<td>" . $model['compatibilityList'] . "</td>";
+            echo "<td>" . $model['stockNum'] . "</td>";
+            echo "<td>";
             echo "<a href='?action=edit&modelID=" . $model['modelID'] . "'>Edit</a>";
             echo " | ";
             echo "<a href='?action=delete&modelID=" . $model['modelID'] . "'>Delete</a>";

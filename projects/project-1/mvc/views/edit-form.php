@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ?>
+<h3>Edit entry</h3>
 <form method="POST" action="?action=edit">
     <input type="hidden" name="modelID" value="<?php echo $modelData['modelID']; ?>">
     <input type="text" name="modelName" value="<?php echo $modelData['modelName']; ?>">
@@ -35,5 +36,5 @@ ini_set('display_errors', 1);
     </select>
     <input type="text" name="stockNum" value="<?php echo $modelData['stockNum']; ?>">
     <input type="submit" name="submitEdit" value="Save Changes">
-    <input type="button" onclick="window.location.href='index.php';" value="Cancel">
+    <input type="button" onclick="window.location.href='index.php/views/form.php?link=table';" value="Cancel">
 </form>

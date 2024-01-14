@@ -1,9 +1,10 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 
-    include_once 'models/model.php';
+    include_once 'views/header.php';
     include_once '_includes/config.php';
+    include_once 'models/model.php';
    
     class Controller {
         private $model;
@@ -11,7 +12,7 @@ ini_set('display_errors', 1);
             $this->model = new computerModel($connection);
         }
 
-        public function showAll() {
+        public function showTable() {
             $models = $this->model->selectAll();
             // var_dump($models);
             include 'views/home.php';
@@ -38,7 +39,6 @@ ini_set('display_errors', 1);
         public function addInfo() {
             // echo "addInfo function called";
             // var_dump($_POST);
-
             $modelName = $_POST['modelName'];
             $brandID = $_POST['brandID'];
             $partsTypeID = $_POST['partsTypeID'];
@@ -47,10 +47,9 @@ ini_set('display_errors', 1);
             $stockNum = $_POST['stockNum'];
             if (!$modelName || !$brandID || !$partsTypeID || !$price || !$compatibilityID || !$stockNum) {
                 echo "<p>Missing information</p>";
-                return;
+                return true;
             } else if($this->model->insertModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $stockNum)){
-                header("Location: index.php");
-                exit();
+                header ('Location: index.php/views/form.php?link=table');
             } else {
                 echo "<p>Could not add models</p>";
             }
@@ -61,7 +60,7 @@ ini_set('display_errors', 1);
             if (!$brandName) {
                 echo "<p>Missing Brand Name</p>";
             } else if($this->model->insertBrand($brandName)){
-                header("Location: index.php");
+                return true;
             } else {
                 echo "<p>Could not add brand</p>";
             }
@@ -72,7 +71,7 @@ ini_set('display_errors', 1);
             if (!$partsTypeName) {
                 echo "<p>Missing Parts Type</p>";
             } else if($this->model->insertPartsType($partsTypeName)){
-                header("Location: index.php");
+                return true;
             } else {
                 echo "<p>Could not add parts type</p>";
             }
@@ -93,8 +92,7 @@ ini_set('display_errors', 1);
 
         public function updateInfo($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id, $stockNum) {
             if ($this->model->updateModel($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id, $stockNum)) {
-                header("Location: index.php");
-                exit();
+                return true;
             } else {
                 echo "Failed to update the model.";
             }
@@ -104,8 +102,7 @@ ini_set('display_errors', 1);
         public function deleteInfo($id) {
             $model = $this->model->deleteModel($id);
             if ($model) {
-                header("Location: index.php");
-                exit();
+                header ('Location: index.php/views/form.php?link=table');
             } else {
                 echo "Error deleting record";
             }
@@ -115,23 +112,15 @@ ini_set('display_errors', 1);
     $connection = new ConnectionObject($dbConfig['host'], $dbConfig['username'], $dbConfig['password'], $dbConfig['database']);
     $controller = new Controller($connection);
 
-
-    if(isset($_POST['submit'])) {
+    if (isset($_GET['task']) && $_GET['task'] === 'add-info' && isset($_POST['submit'])) {
         $controller->addInfo();
-        $controller->showForm();
+        $_POST['modelName'] = "";
+
     } else if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['modelID'])) {
         $id = $_GET['modelID'];
         $controller->getEditModelID($id);
-    } else {
-        $controller->showForm();
-    }
 
-    if (isset($_POST['add'])) {
-        $controller->addBrand();
-        $controller->addPartsType();
-    }
-
-    if (isset($_POST['submitEdit'])) {
+    } else if (isset($_POST['submitEdit'])) {
         $modelName = $_POST['modelName'];
         $brandID = $_POST['brandID'];
         $partsTypeID = $_POST['partsTypeID'];
@@ -140,11 +129,26 @@ ini_set('display_errors', 1);
         $id = $_POST['modelID'];
         $stockNum = $_POST['stockNum'];
         $controller->updateInfo($modelName, $brandID, $partsTypeID, $price, $compatibilityID, $id, $stockNum);
-    }
+        header ('Location: index.php/views/form.php?link=table');
 
-    if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['modelID'])) {
+    } else if (isset($_GET['task']) && $_GET['task'] === 'add-selection' && isset($_POST['submit'])) {
+        $controller->addBrand();
+        $controller->addPartsType();
+
+        $_POST['brandName'] = "";
+        $_POST['partsTypeName'] = "";
+
+    } else if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['modelID'])) {
         $id = $_GET['modelID'];
         $controller->deleteInfo($id);
+    }
+
+    $skipForm = (isset($_GET['action']) && $_GET['action'] === 'edit');
+
+    if (isset($_GET['link']) && $_GET['link'] === 'table') {
+        $controller->showTable();
+    } else if (!$skipForm) {
+        $controller->showForm();
     }
 
 ?>
