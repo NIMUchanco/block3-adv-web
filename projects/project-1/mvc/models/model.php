@@ -26,7 +26,7 @@ class computerModel {
     public function selectAll(){
         $mysqli = $this->connect();
         if($mysqli) {
-            $result = $mysqli->query("SELECT models.*, brands.brandName, partsType.partsTypeName, compatibility.compatibilityList FROM models JOIN brands ON models.brandID = brands.brandID JOIN partsType ON models.partsTypeID = partsType.partsTypeID JOIN compatibility ON models.compatibilityID = compatibility.compatibilityID ORDER BY models.modelID ASC;");
+            $result = $mysqli->query("SELECT models.*, brands.brandName, partsType.partsTypeName, compatibility.compatibilityList FROM models JOIN brands ON models.brandID = brands.brandID JOIN partsType ON models.partsTypeID = partsType.partsTypeID JOIN compatibility ON models.compatibilityID = compatibility.compatibilityID ORDER BY models.modelID DESC;");
             while($row = $result->fetch_assoc()) {
                 $results[] = $row;
             }
