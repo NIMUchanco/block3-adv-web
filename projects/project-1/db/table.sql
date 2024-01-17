@@ -25,11 +25,11 @@ CREATE TABLE `maiko25_adv_web`.`compatibility` (
     PRIMARY KEY (`compatibilityID`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE `maiko25_adv_web`.`stock` (
-    `stockID` INT NOT NULL AUTO_INCREMENT ,
-    `modelID` INT NOT NULL , `stockNum` INT NOT NULL ,
-    PRIMARY KEY (`stockID`)
-) ENGINE = InnoDB;
+-- CREATE TABLE `maiko25_adv_web`.`stock` (
+--     `stockID` INT NOT NULL AUTO_INCREMENT ,
+--     `modelID` INT NOT NULL , `stockNum` INT NOT NULL ,
+--     PRIMARY KEY (`stockID`)
+-- ) ENGINE = InnoDB;
 
 
 -- INSERT DATA --
@@ -47,7 +47,7 @@ INSERT INTO `models` (`modelID`, `modelName`, `brandID`, `partsTypeID`, `price`,
 -- FOREIGN KEYS --
 ALTER TABLE `models` ADD CONSTRAINT `brandID` FOREIGN KEY (`brandID`) REFERENCES `brands`(`brandID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 ALTER TABLE `models` ADD CONSTRAINT `partsTypeID` FOREIGN KEY (`partsTypeID`) REFERENCES `partsType`(`partsTypeID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `models` ADD CONSTRAINT `compatibilityID` FOREIGN KEY (`compatibilityID`) REFERENCES `compatibility`(`compatibilityID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+-- ALTER TABLE `models` ADD CONSTRAINT `compatibilityID` FOREIGN KEY (`compatibilityID`) REFERENCES `compatibility`(`compatibilityID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 ALTER TABLE `stock` ADD CONSTRAINT `modelID` FOREIGN KEY (`modelID`) REFERENCES `models`(`modelD`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 
